@@ -1,6 +1,4 @@
-# ml-monitoring-with-wandb
-
-ML monitoring with Weights &amp; Biases
+# :detective::robot: ML monitoring with Weights & Biases
 
 ## TODO
 
