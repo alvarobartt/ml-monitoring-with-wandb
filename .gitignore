@@ -129,6 +129,6 @@ dmypy.json
 .pyre/
 
 # Dataset
-dataset/train/*/*
-dataset/val/*/*
-dataset/test/*/*
+dataset/train/
+dataset/val/
+dataset/test/
