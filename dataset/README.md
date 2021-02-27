@@ -15,7 +15,7 @@ classes have been discarded.
 
 The train dataset can be downloaded from the following Dropbox URL: https://www.dropbox.com/s/p4afak2ccgbsup3/train.zip?dl=0
 
-## :glasses: Validation Dataset
+## :eyeglasses: Validation Dataset
 
 The validation dataset can be downloaded from the following Dropbox URL: https://www.dropbox.com/s/q633blvy837q082/val.zip?dl=0
 
