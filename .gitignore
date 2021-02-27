@@ -132,3 +132,6 @@ dmypy.json
 dataset/train/
 dataset/val/
 dataset/test/
+
+# Logs
+wandb/
