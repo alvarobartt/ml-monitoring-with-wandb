@@ -1,4 +1,6 @@
-# :detective::robot: ML monitoring with Weights & Biases
+# :detective::robot: Monitoring a PyTorch Lightning CNN with Weights & Biases
+
+- https://arxiv.org/pdf/1409.1556v6.pdf
 
 ---
 
