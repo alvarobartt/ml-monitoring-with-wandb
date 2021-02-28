@@ -135,3 +135,4 @@ dataset/test/
 
 # Logs
 wandb/
+lightning_logs/
