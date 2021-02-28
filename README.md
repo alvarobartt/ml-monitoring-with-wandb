@@ -9,15 +9,38 @@
 - [:hammer_and_wrench: Requirements](#hammer_and_wrench-requirements)
 - [:open_file_folder: Dataset](#open_file_folder-dataset)
 - [:robot: Modelling](#robot-modelling)
-- [:rocket: Deployment](#rocket-deployment)
-- [:whale2: Docker](#whale2-docker)
-- [:mage_man: Usage](#mage_man-usage)
+- [:detective: Monitoring](#detective-monitoring)
 - [:computer: Credits](#computer-credits)
 - [:crystal_ball: Future Tasks](#crystal_ball-future-tasks)
 
 ---
 
 ## :hammer_and_wrench: Requirements
+
+...
+
+```
+pip install -r requirements.txt
+```
+
+__Note__. If you are using Jupyter Lab, either on a local environment or hosted on AWS, Azure or GCP, you will 
+need to install the following Jupyter Lab extensions so as to see the training progress bar in your Notebook, otherwise
+you will just see a text similar to: `HBox(children=(FloatProgress(value=0.0, ...)`.
+
+If you are using conda you will need to install nodejs first, and the proceed with the next steps. If you are not
+using conda just skip this step.
+
+```
+conda install nodejs
+```
+
+And then install and activate the following Jupyter Lab widget so that you can see the tqdm progress bar properly
+in your Notebook, while the PyTorch Lightning model is being trained.
+
+```
+jupyter labextension install @jupyter-widgets/jupyterlab-manager
+jupyter nbextension enable --py widgetsnbextension
+```
 
 ---
 
@@ -40,26 +63,35 @@ Find all the information about the dataset in [dataset/README.md](https://github
 
 ## :robot: Modelling
 
----
-
-## :rocket: Deployment
+PyTorch Lightning bla bla bla
 
 ---
 
-## :whale2: Docker
+## :detective: Monitoring
 
----
+WandB register, creating project, monitoring, installation, bla bla bla
 
-## :mage_man: Usage
+__Note__. Both PyTorch Lightning and Weights & Biases log directories are included in the `.gitignore` file, which means
+that the logs will not be updated to GitHub, feel free to remove those lines so that GIT does not ignore these directories.
+Anyway as you are using Weights & Biases, the logs will be stored there, so there's no need to store them locally.
 
 ---
 
 ## :computer: Credits
 
-Credits for the dataset to [Alexandre Attia](https://github.com/alexattia) for creating it, as well as the Kaggle
-community that made it possible, as they included a lot of images to the original dataset (from 20 characters to 
-up to 42).
+Credits to [Alexandre Attia](https://github.com/alexattia) creating [The Simpsons Characters Dataset](https://www.kaggle.com/alexattia/the-simpsons-characters-dataset), 
+as well as to the Kaggle community that made it possible, as they included a lot of manually curated images to the 
+original dataset that scaled from 20 characters originally to 42.
+
+Credits to [Lezwon Castelino](https://github.com/lezwon) for solving the PyTorch Lightning progress bar issue as he 
+nicely provided a solution to the issue in [this PyTorch Lightning issue](https://github.com/PyTorchLightning/pytorch-lightning/issues/1112)
+sharing the following [StackOverflow post](https://stackoverflow.com/questions/60656978/display-tqdm-in-aws-sagemakers-jupyterlab).
+
+Last but not least, credits to [Charles Frye](https://github.com/charlesfrye) for creating and explaining in detail the integration
+of Weights & Biases with the PyTorch Lightning training in the [PyTorch Lightning + W&B example](https://github.com/wandb/examples/blob/master/colabs/pytorch-lightning/Supercharge_your_Training_with_Pytorch_Lightning_%2B_Weights_%26_Biases.ipynb).
 
 ---
 
 ## :crystal_ball: Future Tasks
+
+- [ ] 
