@@ -1,6 +1,6 @@
 # :detective::robot: Monitoring a PyTorch Lightning CNN with Weights & Biases
 
-- https://arxiv.org/pdf/1409.1556v6.pdf
+TL;DR bla bla bla
 
 ---
 
@@ -17,13 +17,13 @@
 
 ## :hammer_and_wrench: Requirements
 
-...
+bla bla bla
 
 ```
 pip install -r requirements.txt
 ```
 
-__Note__. If you are using Jupyter Lab, either on a local environment or hosted on AWS, Azure or GCP, you will 
+__Note__. If you are using Jupyter Lab or Jupyter Notebooks, either on a local environment or hosted on AWS, Azure or GCP, you will 
 need to install the following Jupyter Lab extensions so as to see the training progress bar in your Notebook, otherwise
 you will just see a text similar to: `HBox(children=(FloatProgress(value=0.0, ...)`.
 
@@ -63,7 +63,12 @@ Find all the information about the dataset in [dataset/README.md](https://github
 
 ## :robot: Modelling
 
-PyTorch Lightning bla bla bla
+Along this tutorial we will be using PyTorch Lightning as the training interface for out PyTorch model. This means
+that we will first create the plain PyTorch model and its training loop, that will be later translated to PyTorch 
+Ligthning.
+
+So on, we will define a pretty simple CNN architecture for "The Simpsons Characters" dataset that we are using (the 
+modified version), that consists on 32x32px RGB images, tensors of shape `(32, 32, 3)` in (H, W, C) format.
 
 ```python
 import torch
@@ -72,9 +77,9 @@ import torch.nn as nn
 class SimpsonsNet(nn.Module):
     def __init__(self):
         super(SimpsonsNet, self).__init__()
-        self.conv1 = nn.Conv2d(3, 16, kernel_size=3, padding=1) # 32 x 32
-        self.conv2 = nn.Conv2d(16, 32, kernel_size=3, padding=1) # 32 x 32
-        self.conv3 = nn.Conv2d(32, 32, kernel_size=3, padding=1) # 16 x 16
+        self.conv1 = nn.Conv2d(3, 16, kernel_size=3, padding=1)
+        self.conv2 = nn.Conv2d(16, 32, kernel_size=3, padding=1)
+        self.conv3 = nn.Conv2d(32, 32, kernel_size=3, padding=1)
         self.dropout = nn.Dropout(.2)
         self.fc1 = nn.Linear(16*16*32, 128)
         self.fc2 = nn.Linear(128, 10)
@@ -92,7 +97,53 @@ class SimpsonsNet(nn.Module):
         return x
 ```
 
-Which translated to PyTorch Lightning it ends up as easy as:
+Once we create the plain PyTorch model we need to intantiate the class and initialize/define both the loss function
+and the optimizer that we will be using to train the net.
+
+```python
+import torch.nn as nn
+import torch.optim as optim
+
+criterion = nn.CrossEntropyLoss()
+optimizer = optim.Adam(model.parameters())
+```
+
+And then we need to create the training loop, which looks like:
+
+```python
+num_epochs = 10
+
+for epoch in range(num_epochs):
+    print(f"\nEpoch {epoch}")
+    running_loss = .0
+    running_corrects = .0
+    model.train()
+    for inputs, labels in train_loader:
+        inputs, labels = inputs.to(device), labels.to(device)
+
+        optimizer.zero_grad()
+        
+        outputs = model(inputs)
+        _, preds = torch.max(outputs, 1)
+        loss = criterion(outputs, labels)
+        loss.backward()
+        optimizer.step()
+
+        running_loss += loss.item() * inputs.size(0)
+        res = torch.sum(preds == labels)
+        running_corrects += res
+    epoch_loss = running_loss / len(train_dataset)
+    epoch_acc = running_corrects.double() / len(train_dataset)
+    print(f"loss: {epoch_loss}, acc: {epoch_acc}")
+```
+
+That just for the training, even though we could include also the validation and the test; but that will just add
+more complexity to the loop. This being said, we will proceed with the translation from plain PyTorch to PyTorch Lightning,
+so that we will see how easy and structured it is to create a training interface for any model.
+
+---
+
+All the code above (both the net definition and the training loop) translated to PyTorch Lightning it ends up being as easy as:
 
 ```python
 import torch
@@ -154,7 +205,7 @@ class SimpsonsNet(LightningModule):
         return torch.optim.Adam(self.parameters())
 ```
 
-And then the trainer...
+So that then, in order to train the net after defining all the steps, is just like:
 
 ```python
 import pytorch_lightning as pl
@@ -163,13 +214,36 @@ trainer = pl.Trainer(gpus=1, progress_bar_refresh_rate=10, max_epochs=10)
 trainer.fit(model, train_loader, val_loader)
 ```
 
-bla bla bla
+So this is the basic translation from plain PyTorch to PyTorch Lightning, in the following section we will
+see how easy is to integrate any logging interface to the PyTorch Lightning Trainer.
 
 ---
 
 ## :detective: Monitoring
 
 WandB register, creating project, monitoring, installation, bla bla bla
+
+As mentioned above, the PyTorch Lightning Trainer did not contain any logging interface defined, so that the logs
+in the PyTorch Lightining module `self.evaluate()` function were just being printed locally. But if we include a custom
+logger, those logging messages will be redirected.
+
+So to update the previous training code to include Weights and Biases (`wandb`) as the custom logging interface, we just 
+need to replace the Trainer code block with:
+
+```python
+import pytorch_lightning as pl
+from pytorch_lightning.loggers import WandbLogger
+
+trainer = pl.Trainer(gpus=1, progress_bar_refresh_rate=10, max_epochs=10, logger=WandbLogger())
+trainer.fit(model, train_loader, val_loader);
+```
+
+Which will dump the logs to Weights and Biases, you will see both the "Project Page" and the "Run Page" when fitting the model
+so that you just need to click there in order to go to https://wandb.ai/site to track your models.
+
+After some training loops of the same model, the Weights and Biases project page looks like:
+
+![]()
 
 __Note__. Both PyTorch Lightning and Weights & Biases log directories are included in the `.gitignore` file, which means
 that the logs will not be updated to GitHub, feel free to remove those lines so that GIT does not ignore these directories.
@@ -189,9 +263,3 @@ sharing the following [StackOverflow post](https://stackoverflow.com/questions/6
 
 Last but not least, credits to [Charles Frye](https://github.com/charlesfrye) for creating and explaining in detail the integration
 of Weights & Biases with the PyTorch Lightning training in the [PyTorch Lightning + W&B example](https://github.com/wandb/examples/blob/master/colabs/pytorch-lightning/Supercharge_your_Training_with_Pytorch_Lightning_%2B_Weights_%26_Biases.ipynb).
-
----
-
-## :crystal_ball: Future Tasks
-
-- [ ] 
