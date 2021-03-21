@@ -221,7 +221,38 @@ see how easy is to integrate any logging interface to the PyTorch Lightning Trai
 
 ## :detective: Monitoring
 
-WandB register, creating project, monitoring, installation, bla bla bla
+Before starting with the ML monitoring, you will need to setup your Weights and Biases account and install 
+the required Python packages so that you can dump the logs in your Weights and Biases project's page.
+
+First you need to login to Weights and Biases at https://wandb.ai/login, where the preferred option is to 
+log in using your GitHub account, so that you can synchronize both GitHub and wandb.
+
+![wandb-login](images/wandb-login.png)
+
+Once registered, you will see your main wandb page, where all your projects will be listed. If this is your first
+login, you won't have any. So you should create one in order to have a proper project where you dump the logs of 
+your ML model training.
+
+![wanbd-new-project](images/wandb-new-project.png)
+
+So on, at the top of your Python file (.py, .ipynb) you will need to initialize wandb, so that you can properly link
+your Python file with your wandb account and project. In order to do so, you just need to reproduce the steps that 
+wandb showed you whenever you created the project, which in this case it should look like:
+
+```python
+import wandb
+
+wandb.init(project='ml-monitoring-with-wandb', entity='alvarobartt')
+```
+
+The first time it may ask you for an API Key, that you can find in your profile settings on the Weights and Biases site.
+The API Key section looks like the following (if you don't have any API Keys, create a new one):
+
+![wandb-api-key](images/wandb-api-key.png)
+
+Then everything will be properly set up.
+
+---
 
 As mentioned above, the PyTorch Lightning Trainer did not contain any logging interface defined, so that the logs
 in the PyTorch Lightining module `self.evaluate()` function were just being printed locally. But if we include a custom
@@ -243,7 +274,7 @@ so that you just need to click there in order to go to https://wandb.ai/site to 
 
 After some training loops of the same model, the Weights and Biases project page looks like:
 
-![]()
+![wandb-report](images/wandb-report.png)
 
 __Note__. Both PyTorch Lightning and Weights & Biases log directories are included in the `.gitignore` file, which means
 that the logs will not be updated to GitHub, feel free to remove those lines so that GIT does not ignore these directories.
@@ -263,3 +294,11 @@ sharing the following [StackOverflow post](https://stackoverflow.com/questions/6
 
 Last but not least, credits to [Charles Frye](https://github.com/charlesfrye) for creating and explaining in detail the integration
 of Weights & Biases with the PyTorch Lightning training in the [PyTorch Lightning + W&B example](https://github.com/wandb/examples/blob/master/colabs/pytorch-lightning/Supercharge_your_Training_with_Pytorch_Lightning_%2B_Weights_%26_Biases.ipynb).
+
+---
+
+## :crystal_ball: Future Tasks
+
+- [ ] Explore wandb's functionality further
+- [ ] Generate reports from wandb
+- [ ] Explain CPU/GPU consumption monitoring
