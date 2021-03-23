@@ -8,6 +8,10 @@ using the `wandb` Python library, and a few lines of code. __PyTorch Lightning__
 PyTorch wrapper for high-performance AI research. Along this project we will see how to define
 a PyTorch model, wrap it with PyTorch Lightning, and monitor its training with Weights & Biases.
 
+:warning: __Disclaimer__. This project is result of some experiments I ran using `wandb`, but
+it contains a lot more functionality than the one presented in this project, as this is some sort
+of minimal monitoring example.
+
 ---
 
 ## :closed_book: Table of Contents
