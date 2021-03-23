@@ -1,10 +1,10 @@
 # :detective::robot: Monitoring a PyTorch Lightning CNN with Weights & Biases
 
-TL;DR Weights & Biases (wandb) is the future of machine learning; tools for experiment 
+TL;DR __Weights & Biases__ (wandb) is the future of machine learning; tools for experiment 
 tracking, improved model performance, and results collaboration. Weights & Biases helps 
 you keep track of your machine learning projects, and it is framework agnostic, and environment
 agnositc. Weights & Biases has a flexible integration for any Python script by simply
-using the `wandb` Python library, and a few lines of code. PyTorch Lightning is the lightweight 
+using the `wandb` Python library, and a few lines of code. __PyTorch Lightning__ is the lightweight 
 PyTorch wrapper for high-performance AI research. Along this project we will see how to define
 a PyTorch model, wrap it with PyTorch Lightning, and monitor its training with Weights & Biases.
 
@@ -67,7 +67,7 @@ rotated horizontally, and then normalized (mean [0.485, 0.456, 0.406], std [0.22
 
 Find all the information about the dataset in [dataset/README.md](https://github.com/alvarobartt/ml-monitoring-with-wandb/tree/master/dataset).
 
-![The Simpsons Characters Dataset (Top 10 classes)](images/dataset-overview.png)
+![dataset-overview](images/dataset-overview.jpg)
 
 __Note__. If you want to use a similar dataset, I put together a MNIST-like The Simpsons dataset based on this
 one, that you can find at [alvarobartt/simpsons-mnist](https://github.com/alvarobartt/simpsons-mnist).
@@ -289,6 +289,9 @@ After some training loops of the same model, the Weights & Biases project page l
 
 ![wandb-report](images/wandb-report.png)
 
+All this information is really useful as we can clearly keep track of all the experiments we run so as to keep the best model, 
+depending on the feature we want to focus in.
+
 __Note__. Both PyTorch Lightning and Weights & Biases log directories are included in the `.gitignore` file, which means
 that the logs will not be updated to GitHub, feel free to remove those lines so that GIT does not ignore these directories.
 Anyway as you are using Weights & Biases, the logs will be stored there, so there's no need to store them locally.
@@ -312,6 +315,6 @@ of Weights & Biases with the PyTorch Lightning training in the [PyTorch Lightnin
 
 ## :crystal_ball: Future Tasks
 
-- [ ] Explore wandb's functionality further
+- [ ] Explore more wandb functionalities
 - [ ] Generate reports from wandb
 - [ ] Explain CPU/GPU consumption monitoring
