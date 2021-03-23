@@ -1,6 +1,12 @@
 # :detective::robot: Monitoring a PyTorch Lightning CNN with Weights & Biases
 
-TL;DR bla bla bla
+TL;DR Weights & Biases (wandb) is the future of machine learning; tools for experiment 
+tracking, improved model performance, and results collaboration. Weights & Biases helps 
+you keep track of your machine learning projects, and it is framework agnostic, and environment
+agnositc. Weights & Biases has a flexible integration for any Python script by simply
+using the `wandb` Python library, and a few lines of code. PyTorch Lightning is the lightweight 
+PyTorch wrapper for high-performance AI research. Along this project we will see how to define
+a PyTorch model, wrap it with PyTorch Lightning, and monitor its training with Weights & Biases.
 
 ---
 
@@ -17,7 +23,8 @@ TL;DR bla bla bla
 
 ## :hammer_and_wrench: Requirements
 
-bla bla bla
+First of all you will need to install the requirements as it follows, in order to reproduce
+all the content described along this project:
 
 ```
 pip install -r requirements.txt
@@ -53,11 +60,17 @@ which is Kaggle dataset that contains images of some of the main The Simpsons ch
 The original dataset contains 42 classes of The Simpsons characters, with an unbalanced number of samples per 
 class, and a total of 20,935 training images and 990 test images in JPG format.
 
-bla bla bla
+The modified version of the dataset, which is the one that has been used along this project, contains just the top-10
+classes, and the data is balanced to have 1000 samples per class. This results in a total of 10000 RGB images in JPG format, 
+that will be split in train/validation/test as 65/15/20. The images are then rescaled to 32x32 pixels, some of them
+rotated horizontally, and then normalized (mean [0.485, 0.456, 0.406], std [0.229, 0.224, 0.225]).
 
-Find all the information about the dataset in [dataset/README.md](https://github.com/alvarobartt/serving-tensorflow-models/tree/master/dataset).
+Find all the information about the dataset in [dataset/README.md](https://github.com/alvarobartt/ml-monitoring-with-wandb/tree/master/dataset).
 
-![]()
+![The Simpsons Characters Dataset (Top 10 classes)](images/dataset-overview.png)
+
+__Note__. If you want to use a similar dataset, I put together a MNIST-like The Simpsons dataset based on this
+one, that you can find at [alvarobartt/simpsons-mnist](https://github.com/alvarobartt/simpsons-mnist).
 
 ---
 
@@ -221,10 +234,10 @@ see how easy is to integrate any logging interface to the PyTorch Lightning Trai
 
 ## :detective: Monitoring
 
-Before starting with the ML monitoring, you will need to setup your Weights and Biases account and install 
-the required Python packages so that you can dump the logs in your Weights and Biases project's page.
+Before starting with the ML monitoring, you will need to setup your Weights & Biases account and install 
+the required Python packages so that you can dump the logs in your Weights & Biases project's page.
 
-First you need to login to Weights and Biases at https://wandb.ai/login, where the preferred option is to 
+First you need to login to Weights & Biases at https://wandb.ai/login, where the preferred option is to 
 log in using your GitHub account, so that you can synchronize both GitHub and wandb.
 
 ![wandb-login](images/wandb-login.png)
@@ -245,7 +258,7 @@ import wandb
 wandb.init(project='ml-monitoring-with-wandb', entity='alvarobartt')
 ```
 
-The first time it may ask you for an API Key, that you can find in your profile settings on the Weights and Biases site.
+The first time it may ask you for an API Key, that you can find in your profile settings on the Weights & Biases site.
 The API Key section looks like the following (if you don't have any API Keys, create a new one):
 
 ![wandb-api-key](images/wandb-api-key.png)
@@ -258,7 +271,7 @@ As mentioned above, the PyTorch Lightning Trainer did not contain any logging in
 in the PyTorch Lightining module `self.evaluate()` function were just being printed locally. But if we include a custom
 logger, those logging messages will be redirected.
 
-So to update the previous training code to include Weights and Biases (`wandb`) as the custom logging interface, we just 
+So to update the previous training code to include Weights & Biases (`wandb`) as the custom logging interface, we just 
 need to replace the Trainer code block with:
 
 ```python
@@ -269,10 +282,10 @@ trainer = pl.Trainer(gpus=1, progress_bar_refresh_rate=10, max_epochs=10, logger
 trainer.fit(model, train_loader, val_loader);
 ```
 
-Which will dump the logs to Weights and Biases, you will see both the "Project Page" and the "Run Page" when fitting the model
+Which will dump the logs to Weights & Biases, you will see both the "Project Page" and the "Run Page" when fitting the model
 so that you just need to click there in order to go to https://wandb.ai/site to track your models.
 
-After some training loops of the same model, the Weights and Biases project page looks like:
+After some training loops of the same model, the Weights & Biases project page looks like:
 
 ![wandb-report](images/wandb-report.png)
 
