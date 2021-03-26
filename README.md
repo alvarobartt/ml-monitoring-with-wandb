@@ -65,15 +65,15 @@ The original dataset contains 42 classes of The Simpsons characters, with an unb
 class, and a total of 20,935 training images and 990 test images in JPG format.
 
 The modified version of the dataset, which is the one that has been used along this project, contains just the top-10
-classes, and the data is balanced to have 1000 samples per class. This results in a total of 10000 RGB images in JPG format, 
+classes, and the data is balanced to have 1,000 samples per class. This results in a total of 10,000 RGB images in JPG format, 
 that will be split in train/validation/test as 65/15/20. The images are then rescaled to 32x32 pixels, some of them
-rotated horizontally, and then normalized (mean [0.485, 0.456, 0.406], std [0.229, 0.224, 0.225]).
-
-Find all the information about the dataset in [dataset/README.md](https://github.com/alvarobartt/ml-monitoring-with-wandb/tree/master/dataset).
+rotated horizontally randomlly, and then normalized.
 
 ![dataset-overview](images/dataset-overview.jpg)
 
-__Note__. If you want to use a similar dataset, I put together a MNIST-like The Simpsons dataset based on this
+Find all the information about the dataset in [dataset/README.md](https://github.com/alvarobartt/ml-monitoring-with-wandb/tree/master/dataset).
+
+:pushpin: __Note__. If you want to use a similar dataset, I put together a MNIST-like The Simpsons dataset based on this
 one, that you can find at [alvarobartt/simpsons-mnist](https://github.com/alvarobartt/simpsons-mnist).
 
 ---
@@ -296,7 +296,7 @@ After some training loops of the same model, the Weights & Biases project page l
 All this information is really useful as we can clearly keep track of all the experiments we run so as to keep the best model, 
 depending on the feature we want to focus in.
 
-__Note__. Both PyTorch Lightning and Weights & Biases log directories are included in the `.gitignore` file, which means
+:pushpin: __Note__. Both PyTorch Lightning and Weights & Biases log directories are included in the `.gitignore` file, which means
 that the logs will not be updated to GitHub, feel free to remove those lines so that GIT does not ignore these directories.
 Anyway as you are using Weights & Biases, the logs will be stored there, so there's no need to store them locally.
 
