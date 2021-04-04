@@ -1,6 +1,6 @@
 # :detective::robot: Monitoring a PyTorch Lightning CNN with Weights & Biases
 
-TL;DR __Weights & Biases__ (wandb) is the future of machine learning; tools for experiment 
+__Weights & Biases__ (wandb) is the future of machine learning; tools for experiment 
 tracking, improved model performance, and results collaboration. Weights & Biases helps 
 you keep track of your machine learning projects, and it is framework agnostic, and environment
 agnositc. Weights & Biases has a flexible integration for any Python script by simply
@@ -34,7 +34,7 @@ all the content described along this project:
 pip install -r requirements.txt
 ```
 
-__Note__. If you are using Jupyter Lab or Jupyter Notebooks, either on a local environment or hosted on AWS, Azure or GCP, you will 
+:pushpin: __Note__. If you are using Jupyter Lab or Jupyter Notebooks, either on a local environment or hosted on AWS, Azure or GCP, you will 
 need to install the following Jupyter Lab extensions so as to see the training progress bar in your Notebook, otherwise
 you will just see a text similar to: `HBox(children=(FloatProgress(value=0.0, ...)`.
 
