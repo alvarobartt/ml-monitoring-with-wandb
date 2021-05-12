@@ -14,17 +14,6 @@ of minimal monitoring example.
 
 ---
 
-## :closed_book: Table of Contents
-
-- [:hammer_and_wrench: Requirements](#hammer_and_wrench-requirements)
-- [:open_file_folder: Dataset](#open_file_folder-dataset)
-- [:robot: Modelling](#robot-modelling)
-- [:detective: Monitoring](#detective-monitoring)
-- [:computer: Credits](#computer-credits)
-- [:crystal_ball: Future Tasks](#crystal_ball-future-tasks)
-
----
-
 ## :hammer_and_wrench: Requirements
 
 First of all you will need to install the requirements as it follows, in order to reproduce
