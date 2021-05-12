@@ -319,6 +319,7 @@ of Weights & Biases with the PyTorch Lightning training in the [PyTorch Lightnin
 
 ## :crystal_ball: Future Tasks
 
-- [ ] Explore more wandb functionalities
-- [ ] Generate reports from wandb
+- [ ] Explore more wandb functionalities (config, multirun and save pth)
+- [ ] Fix current training (CrossEntropyLoss + F.log_softmax in last layer lol)
 - [ ] Explain CPU/GPU consumption monitoring
+- [ ] Explain Sweeps?
