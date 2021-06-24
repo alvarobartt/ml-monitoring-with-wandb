@@ -99,7 +99,7 @@ class SimpsonsNet(nn.Module):
         x = nn.Flatten()(x)
         x = F.relu(self.fc1(x))
         x = self.dropout(x)
-        x = F.log_softmax(self.fc2(x), dim=1)
+        x = self.fc2(x)
         return x
 ```
 
@@ -162,7 +162,7 @@ from pytorch_lightning.metrics.functional import accuracy
 
 class SimpsonsNet(LightningModule):
     def __init__(self):
-        super(SimpleNet, self).__init__()
+        super(SimpsonsNet, self).__init__()
         
         self.conv1 = nn.Conv2d(3, 16, kernel_size=3, padding=1)
         self.conv2 = nn.Conv2d(16, 32, kernel_size=3, padding=1)
@@ -181,7 +181,7 @@ class SimpsonsNet(LightningModule):
         x = self.flatten(x)
         x = F.relu(self.fc1(x))
         x = self.dropout(x)
-        x = F.log_softmax(self.fc2(x), dim=1)
+        x = self.fc2(x)
         return x
 
     def _evaluate(self, batch, batch_idx, stage):
@@ -309,7 +309,6 @@ of Weights & Biases with the PyTorch Lightning training in the [PyTorch Lightnin
 ## :crystal_ball: Future Tasks
 
 - [ ] Explore more wandb functionalities (config, multirun and save pth)
-- [X] Fix current training (CrossEntropyLoss + F.log_softmax in last layer lol)
 - [ ] Re-train the model with different configurations
 - [ ] Explain CPU/GPU consumption monitoring
 - [ ] Use beta feature for checking the model's predictions (https://twitter.com/weights_biases/status/1364342536836288515)
