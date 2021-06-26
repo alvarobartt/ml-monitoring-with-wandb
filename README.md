@@ -294,12 +294,26 @@ trainer.fit(model, train_loader, val_loader);
 Which will dump the logs to Weights & Biases, you will see both the "Project Page" and the "Run Page" when fitting the model
 so that you just need to click there in order to go to https://wandb.ai/site to track your models.
 
-After some training loops of the same model, the Weights & Biases project page looks like:
+After some training loops of the same model with different configurations, the Weights & Biases project page looks like:
 
 ![wandb-report](imgs/wandb-report.png)
 
+But so as to see the configuration of each one of those runs we just need to select the run that we want to check and 
+all the configuration previously set in the code, will be available in the Overview tab of each run.
+
+![wandb-run-config](imgs/wandb-run-config.png)
+
 All this information is really useful as we can clearly keep track of all the experiments we run so as to keep the best model, 
 depending on the feature we want to focus in.
+
+Anyway, in the training code we are already managing which model will be stored in `wandb`, assuming that the best model is the
+one with the highest accuracy, after all the epochs and once the run is finished, all those files (in this case the model's
+`state_dict` as .pth) will be uploaded to the Files tab.
+
+![wandb-run-files](imgs/wandb-run-files.png)
+
+:pushpin: __Note__. The last checkpoint based on the highest validation accuracy will also be updated automatically, as 
+defined in the default behavior of the PyTorch Lightning Trainer; specifying both the epoch and the step when it was saved.
 
 :pushpin: __Note__. Both PyTorch Lightning and Weights & Biases log directories are included in the `.gitignore` file, which means
 that the logs will not be updated to GitHub, feel free to remove those lines so that GIT does not ignore these directories.
@@ -324,7 +338,5 @@ of Weights & Biases with the PyTorch Lightning training in the [PyTorch Lightnin
 
 ## :crystal_ball: Future Tasks
 
-- [ ] Explore more wandb functionalities (config, multirun and save pth)
-- [ ] Re-train the model with different configurations
-- [ ] Use beta feature for checking the model's predictions (https://twitter.com/weights_biases/status/1364342536836288515)
-- [ ] Explain Sweeps?
+- [ ] Use beta feature to show the predicted labels per image (https://twitter.com/weights_biases/status/1364342536836288515)
+- [ ] Explain how to use `wandb` Sweeps
