@@ -58,7 +58,7 @@ classes, and the data is balanced to have 1,000 samples per class. This results 
 that will be split in train/validation/test as 65/15/20. The images are then rescaled to 32x32 pixels, some of them
 rotated horizontally randomlly, and then normalized.
 
-![dataset-overview](images/dataset-overview.jpg)
+![dataset-overview](imgs/dataset-overview.jpg)
 
 Find all the information about the dataset in [dataset/README.md](https://github.com/alvarobartt/ml-monitoring-with-wandb/tree/master/dataset).
 
@@ -233,13 +233,13 @@ the required Python packages so that you can dump the logs in your Weights & Bia
 First you need to login to Weights & Biases at https://wandb.ai/login, where the preferred option is to 
 log in using your GitHub account, so that you can synchronize both GitHub and wandb.
 
-![wandb-login](images/wandb-login.png)
+![wandb-login](imgs/wandb-login.png)
 
 Once registered, you will see your main wandb page, where all your projects will be listed. If this is your first
 login, you won't have any. So you should create one in order to have a proper project where you dump the logs of 
 your ML model training.
 
-![wanbd-new-project](images/wandb-new-project.png)
+![wanbd-new-project](imgs/wandb-new-project.png)
 
 So on, at the top of your Python file (.py, .ipynb) you will need to initialize wandb, so that you can properly link
 your Python file with your wandb account and project. In order to do so, you just need to reproduce the steps that 
@@ -254,7 +254,7 @@ wandb.init(project='ml-monitoring-with-wandb', entity='alvarobartt')
 The first time it may ask you for an API Key, that you can find in your profile settings on the Weights & Biases site.
 The API Key section looks like the following (if you don't have any API Keys, create a new one):
 
-![wandb-api-key](images/wandb-api-key.png)
+![wandb-api-key](imgs/wandb-api-key.png)
 
 Then everything will be properly set up.
 
@@ -280,7 +280,7 @@ so that you just need to click there in order to go to https://wandb.ai/site to 
 
 After some training loops of the same model, the Weights & Biases project page looks like:
 
-![wandb-report](images/wandb-report.png)
+![wandb-report](imgs/wandb-report.png)
 
 All this information is really useful as we can clearly keep track of all the experiments we run so as to keep the best model, 
 depending on the feature we want to focus in.
