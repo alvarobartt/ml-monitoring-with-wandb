@@ -128,6 +128,9 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# VSCode Configuration Files
+.vscode/
+
 # Dataset
 dataset/train/
 dataset/val/

@@ -1,4 +1,4 @@
-# :detective::robot: Monitoring a PyTorch Lightning CNN with Weights & Biases
+# :detective::robot: Monitoring a PyTorch Lightning model with Weights & Biases
 
 __Weights & Biases__ (wandb) is the future of machine learning; tools for experiment 
 tracking, improved model performance, and results collaboration. Weights & Biases helps 
@@ -310,6 +310,5 @@ of Weights & Biases with the PyTorch Lightning training in the [PyTorch Lightnin
 
 - [ ] Explore more wandb functionalities (config, multirun and save pth)
 - [ ] Re-train the model with different configurations
-- [ ] Explain CPU/GPU consumption monitoring
 - [ ] Use beta feature for checking the model's predictions (https://twitter.com/weights_biases/status/1364342536836288515)
 - [ ] Explain Sweeps?
