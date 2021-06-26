@@ -1,6 +1,7 @@
 # Copyright 2021 Alvaro Bartolome, alvarobartt @ GitHub
 # See LICENSE for details.
 
+from torch.nn.modules import transformer
 from torchvision import transforms as T
 from torchvision.datasets import ImageFolder
 
@@ -45,8 +46,7 @@ class SimpsonsTransforms(T.Compose):
 
 class SimpsonsImageFolder(ImageFolder):
     def __init__(self, root, phase):
-        super().__init__(root=root)
-        self.root = root
+        super().__init__(root=f"{root}/{phase}")
         self.phase = phase
         self.transform = SimpsonsTransforms(phase=phase)
 

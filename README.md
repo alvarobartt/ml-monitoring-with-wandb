@@ -181,31 +181,47 @@ class SimpsonsNet(LightningModule):
         x = self.flatten(x)
         x = F.relu(self.fc1(x))
         x = self.dropout(x)
-        x = self.fc2(x)
+        x = F.log_softmax(self.fc2(x), dim=1)
         return x
 
-    def _evaluate(self, batch, batch_idx, stage):
+    def training_step(self, batch, batch_idx):
         x, y = batch
-        out = self.forward(x)
-        logits = F.log_softmax(out, dim=1)
+        logits = self(x)
         loss = F.nll_loss(logits, y)
+        
         preds = torch.argmax(logits, dim=1)
         acc = accuracy(preds, y)
 
-        self.log(f'{stage}_loss', loss, prog_bar=True)
-        self.log(f'{stage}_acc', acc, prog_bar=True)
+        self.log('train_loss', loss, on_step=True, on_epoch=True, logger=True)
+        self.log('train_acc', acc, on_step=True, on_epoch=True, logger=True)
 
-        return loss, acc
-    
-    def training_step(self, batch, batch_idx):
-        loss, acc = self._evaluate(batch, batch_idx, 'train')
         return loss
 
     def validation_step(self, batch, batch_idx):
-        self._evaluate(batch, batch_idx, 'val')
+        x, y = batch
+        logits = self(x)
+        loss = F.nll_loss(logits, y)
+
+        preds = torch.argmax(logits, dim=1)
+        acc = accuracy(preds, y)
+
+        self.log('val_loss', loss, prog_bar=True)
+        self.log('val_acc', acc, prog_bar=True)
+
+        return loss
 
     def test_step(self, batch, batch_idx):
-        self._evaluate(batch, batch_idx, 'test')
+        x, y = batch
+        logits = self(x)
+        loss = F.nll_loss(logits, y)
+        
+        preds = torch.argmax(logits, dim=1)
+        acc = accuracy(preds, y)
+
+        self.log('test_loss', loss, prog_bar=True)
+        self.log('test_acc', acc, prog_bar=True)
+
+        return loss
 
     def configure_optimizers(self):
         return torch.optim.Adam(self.parameters())

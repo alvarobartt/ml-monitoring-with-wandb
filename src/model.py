@@ -10,50 +10,67 @@ from torchmetrics.functional import accuracy # LightningDeprecationWarning: `pyt
 
 
 class SimpsonsNet(LightningModule):
-    def __init__(self):
+    def __init__(self, num_classes: int = 10):
         super(SimpsonsNet, self).__init__()
         
         self.conv1 = nn.Conv2d(3, 16, kernel_size=3, padding=1)
         self.conv2 = nn.Conv2d(16, 32, kernel_size=3, padding=1)
         self.conv3 = nn.Conv2d(32, 32, kernel_size=3, padding=1)
+        
+        self.maxpool = nn.MaxPool2d(2)
         self.dropout = nn.Dropout(.2)
+
         self.fc1 = nn.Linear(16*16*32, 128)
-        self.fc2 = nn.Linear(128, 10)
+        self.fc2 = nn.Linear(128, num_classes)
         
     def forward(self, x):
         x = F.relu(self.conv1(x))
         x = F.relu(self.conv2(x))
-        x = F.relu(self.conv3(x))
-        x = F.max_pool2d(x, 2)
-        x = self.dropout(x)
-        x = torch.flatten(x, 1)
+        x = self.maxpool(x)
+        x = x.view(x.size(0), -1)
         x = F.relu(self.fc1(x))
         x = self.dropout(x)
-        x = self.fc2(x)
+        x = F.log_softmax(self.fc2(x), dim=1)
         return x
-
-    def _evaluate(self, batch, batch_idx, stage):
+    
+    def training_step(self, batch, batch_idx):
         x, y = batch
-        out = self.forward(x)
-        logits = F.log_softmax(out, dim=1)
+        logits = self(x)
         loss = F.nll_loss(logits, y)
+        
         preds = torch.argmax(logits, dim=1)
         acc = accuracy(preds, y)
 
-        self.log(f'{stage}_loss', loss, prog_bar=True)
-        self.log(f'{stage}_acc', acc, prog_bar=True)
+        self.log('train_loss', loss, on_step=True, on_epoch=True, logger=True)
+        self.log('train_acc', acc, on_step=True, on_epoch=True, logger=True)
 
-        return loss, acc
-    
-    def training_step(self, batch, batch_idx):
-        loss, acc = self._evaluate(batch, batch_idx, 'train')
         return loss
 
     def validation_step(self, batch, batch_idx):
-        self._evaluate(batch, batch_idx, 'val')
+        x, y = batch
+        logits = self(x)
+        loss = F.nll_loss(logits, y)
+
+        preds = torch.argmax(logits, dim=1)
+        acc = accuracy(preds, y)
+
+        self.log('val_loss', loss, prog_bar=True)
+        self.log('val_acc', acc, prog_bar=True)
+
+        return loss
 
     def test_step(self, batch, batch_idx):
-        self._evaluate(batch, batch_idx, 'test')
+        x, y = batch
+        logits = self(x)
+        loss = F.nll_loss(logits, y)
+        
+        preds = torch.argmax(logits, dim=1)
+        acc = accuracy(preds, y)
+
+        self.log('test_loss', loss, prog_bar=True)
+        self.log('test_acc', acc, prog_bar=True)
+
+        return loss
 
     def configure_optimizers(self):
         return torch.optim.Adam(self.parameters())
