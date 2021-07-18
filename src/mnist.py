@@ -76,4 +76,20 @@ class SimpsonsMNISTDataModule(LightningDataModule):
         
         return DataLoader(dataset=self.test_image_folder,
                           batch_size=self.batch_size,
-                          num_workers=12)
+                          num_workers=12, shuffle=True)
+
+
+CLASS2IDX = {
+    'bart_simpson': 0,
+    'charles_montgomery_burns': 1,
+    'homer_simpson': 2,
+    'krusty_the_clown': 3,
+    'lisa_simpson': 4,
+    'marge_simpson': 5,
+    'milhouse_van_houten': 6,
+    'moe_szyslak': 7,
+    'ned_flanders': 8,
+    'principal_skinner': 9
+}
+
+IDX2CLASS = {v: k for k, v in CLASS2IDX.items()}
