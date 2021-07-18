@@ -12,7 +12,7 @@ from pytorch_lightning.loggers import WandbLogger
 
 import torch
 
-from cifar import SimpsonsDataModule
+from mnist import SimpsonsMNISTDataModule
 from model import SimpsonsNet
 
 
@@ -35,7 +35,7 @@ def train(batch_size: int, epochs: int):
         raise e
 
     # Instantiate the LightningDataModule
-    data_module = SimpsonsDataModule(dataset_path="../dataset", batch_size=batch_size)
+    data_module = SimpsonsMNISTDataModule(dataset_path="../dataset", batch_size=batch_size)
 
     # Load the DataLoaders for both the train and validation datasets
     train_loader = data_module.train_dataloader()
@@ -49,7 +49,7 @@ def train(batch_size: int, epochs: int):
         'parameters': sum(param.numel() for param in model.parameters() if param.requires_grad),
         'train_batches': len(train_loader),
         'val_batches': len(val_loader),
-        'dataset': 'CIFAR-10',
+        'dataset': 'Simpsons-MNIST',
         'dataset_train_size': len(data_module.train_image_folder),
         'dataset_val_size': len(data_module.val_image_folder),
         'input_shape': '[3,32,32]',
