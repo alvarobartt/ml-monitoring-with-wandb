@@ -167,7 +167,7 @@ class SimpsonsNet(LightningModule):
         self.conv1 = nn.Conv2d(3, 16, kernel_size=3, padding=1)
         self.conv2 = nn.Conv2d(16, 32, kernel_size=3, padding=1)
         self.conv3 = nn.Conv2d(32, 32, kernel_size=3, padding=1)
-        self.dropout = nn.Dropout(.2)
+        self.dropout = nn.Dropout(.5)
         self.flatten = nn.Flatten()
         self.fc1 = nn.Linear(16*16*32, 64)
         self.fc2 = nn.Linear(64, 10)
@@ -338,5 +338,4 @@ of Weights & Biases with the PyTorch Lightning training in the [PyTorch Lightnin
 
 ## :crystal_ball: Future Tasks
 
-- [ ] Use beta feature to show the predicted labels per image (https://twitter.com/weights_biases/status/1364342536836288515)
-- [ ] Explain how to use `wandb` Sweeps
+- [ ] Use feature to show the predicted labels per image (https://twitter.com/weights_biases/status/1364342536836288515)

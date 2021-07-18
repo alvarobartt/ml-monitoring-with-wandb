@@ -1,8 +1,7 @@
 # :open_file_folder: The Simpsons Characters Dataset
 
-The original dataset can be found at [__Kaggle - The Simpsons Characters Data__](https://www.kaggle.com/alexattia/the-simpsons-characters-dataset).
-
-Anyway, in this project a prepared version of the dataset has been used.
+The original dataset can be found at [__Kaggle - The Simpsons Characters Data__](https://www.kaggle.com/alexattia/the-simpsons-characters-dataset). Anyway, in this project a prepared version of the dataset has 
+been used, and can be found at [alvarobartt/simpsons-mnist](https://github.com/alvarobartt/simpsons-mnist).
 
 The prepared dataset contains 650 images to train, 150 images to validate and 200 images to test.
 All the images are RGB images in JPG and JPEG format, with different sizes, as no transformation
