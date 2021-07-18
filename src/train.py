@@ -49,7 +49,7 @@ def train(batch_size: int, epochs: int):
         'parameters': sum(param.numel() for param in model.parameters() if param.requires_grad),
         'train_batches': len(train_loader),
         'val_batches': len(val_loader),
-        'dataset': 'cifar10',
+        'dataset': 'CIFAR-10',
         'dataset_train_size': len(data_module.train_image_folder),
         'dataset_val_size': len(data_module.val_image_folder),
         'input_shape': '[3,32,32]',

@@ -18,14 +18,15 @@ class SimpsonsNet(LightningModule):
         self.conv3 = nn.Conv2d(32, 32, kernel_size=3, padding=1)
         
         self.maxpool = nn.MaxPool2d(2)
-        self.dropout = nn.Dropout(.2)
+        self.dropout = nn.Dropout(.5)
 
-        self.fc1 = nn.Linear(16*16*32, 128)
-        self.fc2 = nn.Linear(128, num_classes)
+        self.fc1 = nn.Linear(16*16*32, 64)
+        self.fc2 = nn.Linear(64, num_classes)
         
     def forward(self, x):
         x = F.relu(self.conv1(x))
         x = F.relu(self.conv2(x))
+        x = F.relu(self.conv3(x))
         x = self.maxpool(x)
         x = x.view(x.size(0), -1)
         x = F.relu(self.fc1(x))
