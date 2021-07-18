@@ -9,7 +9,7 @@ from model import SimpsonsNet
 from mnist import SimpsonsMNISTDataModule, IDX2CLASS
 
 
-def model_inference():
+def test_model_inference():
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
     model = SimpsonsNet().load_from_checkpoint('wandb/latest-run/files/ml-monitoring-with-wandb/2fzailcj/checkpoints/epoch=18-step=3875.ckpt')
@@ -30,4 +30,4 @@ def model_inference():
 
 
 if __name__ == '__main__':
-    model_inference()
+    test_model_inference()
