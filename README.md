@@ -307,13 +307,15 @@ All this information is really useful as we can clearly keep track of all the ex
 depending on the feature we want to focus in.
 
 Anyway, in the training code we are already managing which model will be stored in `wandb`, assuming that the best model is the
-one with the highest accuracy, after all the epochs and once the run is finished, all those files (in this case the model's
-`state_dict` as .pth) will be uploaded to the Files tab.
+one with the highest accuracy, once the run is finished, all those files (in this case the model's `state_dict` as .pth) will 
+be uploaded to the Files tab.
 
 ![wandb-run-files](imgs/wandb-run-files.png)
 
 :pushpin: __Note__. The last checkpoint based on the highest validation accuracy will also be updated automatically, as 
 defined in the default behavior of the PyTorch Lightning Trainer; specifying both the epoch and the step when it was saved.
+
+![wandb-checkpoint](imgs/wandb-checkpoint.png)
 
 :pushpin: __Note__. Both PyTorch Lightning and Weights & Biases log directories are included in the `.gitignore` file, which means
 that the logs will not be updated to GitHub, feel free to remove those lines so that GIT does not ignore these directories.
