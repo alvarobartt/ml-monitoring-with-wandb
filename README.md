@@ -1,6 +1,8 @@
 # :detective::robot: Monitoring a PyTorch Lightning model with Weights & Biases
 
-![wandb-lightning](imgs/wandb-lightnin.png)
+<p align="center">
+  <img src="imgs/wandb-lightning.png">
+</p>
 
 __Weights & Biases__ (wandb) is the future of machine learning; tools for experiment 
 tracking, improved model performance, and results collaboration. Weights & Biases helps 
