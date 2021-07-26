@@ -28,6 +28,8 @@ all the content described along this project:
 pip install -r requirements.txt
 ```
 
+---
+
 :pushpin: __Note__. If you are using Jupyter Lab or Jupyter Notebooks, either on a local environment or hosted on AWS, Azure or GCP, you will 
 need to install the following Jupyter Lab extensions so as to see the training progress bar in your Notebook, otherwise
 you will just see a text similar to: `HBox(children=(FloatProgress(value=0.0, ...)`.
