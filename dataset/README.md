@@ -24,6 +24,8 @@ The test dataset can be downloaded from the following Dropbox URL: https://www.d
 
 ---
 
+## :blue_book: Information
+
 To download and extract the train, val and test datasets from the terminal just use the following commands:
 
 ```
