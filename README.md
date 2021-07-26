@@ -348,3 +348,5 @@ of Weights & Biases with the PyTorch Lightning training in the [PyTorch Lightnin
 ## :crystal_ball: Future Tasks
 
 - [ ] Use feature to show the predicted labels per image (https://twitter.com/weights_biases/status/1364342536836288515)
+- [ ] Train model with bigger images, since model's inference results are not that good with images from the Internet
+- [ ] If possible, create a simple Streamlit application on Huggingface Spaces
